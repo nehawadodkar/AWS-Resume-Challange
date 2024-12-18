@@ -2,8 +2,8 @@ name: upload website to S3
 
 on:
   push:
-    #branches:
-    #  - main  
+    branches:
+      - main  
 
 jobs:
   upload-to-s3:
