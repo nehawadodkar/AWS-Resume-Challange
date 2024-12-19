@@ -31,8 +31,9 @@ jobs:
           AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
 
       # Step 4: Invalidate cloudfront cache
-      - name: Invalidate CloudFront cache
-        uses: aws-actions/aws-cloudfront@v2
-        with:
-          distribution-id: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
-          paths: "/index.html"
+      - name: Invalidate CloudFront Cache for index.html
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/index.html"
+  
