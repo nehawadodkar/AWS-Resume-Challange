@@ -23,33 +23,18 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1  
           
-      # Step 3: Fetch previous commit and determine changed HTML files
-      - name: Get list of changed HTML files
-        id: changed_files
-        run: |
-          git fetch origin HEAD~1:refs/remotes/origin/prev-commit
-          CHANGED_HTML_FILES=$(git diff --name-only origin/prev-commit HEAD | grep '\.html$' || true)
-          echo "Changed HTML files: $CHANGED_HTML_FILES"
-          echo "html_files=$CHANGED_HTML_FILES" >> $GITHUB_ENV
-
-      # Step 4: Upload folder to S3
+      
+      # Step 3: Upload folder to S3
       - name: Upload folder to S3
         run: |
           aws s3 sync ./CherryBlossom s3://${{ secrets.AWS_BUCKET_NAME }}
         env:
           AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
 
-      # Step 5: Invalidate CloudFront Cache for changed HTML files
-      - name: Invalidate CloudFront Cache for changed HTML files
+      # Step 4: Invalidate CloudFront Cache for changed HTML files
+      - name: Invalidate CloudFront Cache for index.html
         run: |
-          # Convert the list of changed HTML files into CloudFront paths
-          if [[ -z "${{ env.html_files }}" ]]; then
-            echo "No HTML files changed. Skipping cache invalidation."
-          else
-            PATHS=$(echo "${{ env.html_files }}" | sed 's/^/\"\\//' | sed 's/$/\"/' | tr '\n' ' ')
-            echo "Invalidating the following paths: $PATHS"
-            aws cloudfront create-invalidation \
-              --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
-              --paths $PATHS
-          fi
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
   
