@@ -4,7 +4,7 @@ import { DynamoDBClient, UpdateItemCommand } from '@aws-sdk/client-dynamodb';
 const dynamoDBClient = new DynamoDBClient();
 
 export const handler = async (event) => {
-    const tableName = 'VisitorCounter';
+    const tableName = 'VisitorCounter1';
     const counterIDValue = '1';
 
     try {
