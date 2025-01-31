@@ -7,3 +7,5 @@ terraform.tfvars
 
 # Ignore local Terraform directories
 .terraform/
+
+#ignore the zip file as well #todo
