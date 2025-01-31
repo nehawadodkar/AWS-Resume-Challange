@@ -4,7 +4,7 @@ resource "aws_lambda_function" "visitorCounter" {
   function_name    = "visitorCounter"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "index.handler"
-  runtime          = "nodejs20.x" 
+  runtime          = "nodejs20.x"
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
@@ -32,7 +32,7 @@ resource "aws_iam_policy" "iam_policy_for_resume_project" {
   name        = "aws_iam_policy_for_terraform_resume_project_policy"
   path        = "/"
   description = "AWS IAM Policy for managing the resume project role"
-    policy = jsonencode(
+  policy = jsonencode(
     {
       "Version" : "2012-10-17",
       "Statement" : [
@@ -49,18 +49,19 @@ resource "aws_iam_policy" "iam_policy_for_resume_project" {
           "Effect" : "Allow",
           "Action" : [
             "dynamodb:UpdateItem",
-			      "dynamodb:GetItem"
+            "dynamodb:GetItem"
           ],
-          "Resource" : "arn:aws:dynamodb:*:*:table/VisitorCounter"
+          #"Resource" : "arn:aws:dynamodb:*:*:table/VisitorCounter1"
+          "Resource" : "${aws_dynamodb_table.visitor_counter.arn}"
         },
       ]
   })
 }
 
 resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
-  role = aws_iam_role.iam_for_lambda.name
+  role       = aws_iam_role.iam_for_lambda.name
   policy_arn = aws_iam_policy.iam_policy_for_resume_project.arn
-  
+
 }
 
 data "archive_file" "zip_the_mjs_code" {
@@ -72,7 +73,7 @@ data "archive_file" "zip_the_mjs_code" {
 resource "aws_lambda_function_url" "url1" {
   function_name      = aws_lambda_function.visitorCounter.function_name
   authorization_type = "NONE"
-   cors {
+  cors {
     allow_credentials = true
     allow_origins     = ["*"]
     allow_methods     = ["*"]
@@ -80,4 +81,39 @@ resource "aws_lambda_function_url" "url1" {
     expose_headers    = ["keep-alive", "date"]
     max_age           = 86400
   }
+}
+
+
+resource "aws_dynamodb_table" "visitor_counter" {
+  name         = "VisitorCounter1"
+  billing_mode = "PAY_PER_REQUEST"  # On-demand pricing
+
+  attribute {
+    name = "counterID"
+    type = "S"  # String type for counterID
+  }
+
+  hash_key = "counterID"
+
+  tags = {
+    Name        = "VisitorCounter1"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_dynamodb_table_item" "visitor_item" {
+  table_name = aws_dynamodb_table.visitor_counter.name
+  hash_key   = "counterID"
+
+  item = <<ITEM
+{
+  "counterID": {"S": "1"},
+  "visitCount": {"N": "0"}
+}
+ITEM
+
+lifecycle {
+    ignore_changes = [item]
+  }
+  
 }
