@@ -27,7 +27,7 @@ jobs:
       # Step 3: Upload folder to S3
       - name: Upload folder to S3
         run: |
-          aws s3 sync ./CherryBlossom s3://${{ secrets.AWS_BUCKET_NAME }}
+          aws s3 sync ./infra/CherryBlossom s3://${{ secrets.AWS_BUCKET_NAME }}
         env:
           AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
 
