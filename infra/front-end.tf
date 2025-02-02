@@ -1,15 +1,15 @@
-resource "aws_s3_bucket" "nehaw-cherry-blossom-s3" {
-  bucket = "nehaw-cherry-blossom-s3"
+resource "aws_s3_bucket" "front-end-s3-bucket" {
+  bucket = "${var.s3_bucket_name}"
 
   tags = {
-    Name = "nehaw-cherry-blossom-s3"
+    Name = "${var.s3_bucket_name}"
   }
 
 
 }
 
-resource "aws_s3_bucket_public_access_block" "nehaw-cherry-blossom-s3" {
-  bucket = aws_s3_bucket.nehaw-cherry-blossom-s3.id
+resource "aws_s3_bucket_public_access_block" "front-end-s3-bucket-public-access" {
+  bucket = aws_s3_bucket.front-end-s3-bucket.id
 
   block_public_acls       = true
   block_public_policy     = true
@@ -18,7 +18,7 @@ resource "aws_s3_bucket_public_access_block" "nehaw-cherry-blossom-s3" {
 }
 
 # resource "aws_s3_bucket_acl" "bucket_acl" {
-#   bucket = aws_s3_bucket.nehaw-cherry-blossom-s3.id
+#   bucket = aws_s3_bucket.front-end-s3-bucket.id
 #   acl    = "private"
 # }
 
@@ -52,7 +52,7 @@ locals {
 resource "aws_s3_object" "files" {
   for_each = tomap({ for file in local.files : file => file })
 
-  bucket = aws_s3_bucket.nehaw-cherry-blossom-s3.bucket
+  bucket = aws_s3_bucket.front-end-s3-bucket.bucket
   key    = each.key                                  # Key in the S3 bucket
   source = "${local.source_directory}/${each.value}" # Local file path
   etag   = filemd5("${local.source_directory}/${each.value}")
@@ -68,7 +68,7 @@ resource "aws_s3_object" "files" {
 
 
 # resource "aws_s3_bucket_policy" "public_read" {
-#   bucket = aws_s3_bucket.nehaw-cherry-blossom-s3.id
+#   bucket = aws_s3_bucket.front-end-s3-bucket.id
 
 #   policy = jsonencode({
 #     Version = "2012-10-17"
@@ -77,7 +77,7 @@ resource "aws_s3_object" "files" {
 #         Effect    = "Allow"
 #         Principal = "*"
 #         Action    = "s3:GetObject"
-#         Resource  = "arn:aws:s3:::${aws_s3_bucket.nehaw-cherry-blossom-s3.id}/*"
+#         Resource  = "arn:aws:s3:::${aws_s3_bucket.front-end-s3-bucket.id}/*"
 #       }
 #     ]
 #   })
@@ -87,7 +87,7 @@ resource "aws_s3_object" "files" {
 
 # Create the S3 bucket policy for public access to the index.html via CloudFront
 resource "aws_s3_bucket_policy" "website_bucket_policy" {
-  bucket = aws_s3_bucket.nehaw-cherry-blossom-s3.bucket
+  bucket = aws_s3_bucket.front-end-s3-bucket.bucket
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -97,7 +97,7 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
           Service = "cloudfront.amazonaws.com"
         }
         Action   = "s3:GetObject"
-        Resource = "arn:aws:s3:::${aws_s3_bucket.nehaw-cherry-blossom-s3.bucket}/*"
+        Resource = "arn:aws:s3:::${aws_s3_bucket.front-end-s3-bucket.bucket}/*"
         Condition = {
           StringEquals = {
             "AWS:SourceArn" = "${aws_cloudfront_distribution.s3_distribution.arn}"
@@ -114,7 +114,7 @@ locals {
 
 #Create an Origin Access Control for CloudFront to access S3
 resource "aws_cloudfront_origin_access_control" "s3_access_control" {
-  name                              = "s3-oac-${aws_s3_bucket.nehaw-cherry-blossom-s3.bucket}"
+  name                              = "s3-oac-${aws_s3_bucket.front-end-s3-bucket.bucket}"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
@@ -122,7 +122,7 @@ resource "aws_cloudfront_origin_access_control" "s3_access_control" {
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name              = aws_s3_bucket.nehaw-cherry-blossom-s3.bucket_regional_domain_name
+    domain_name              = aws_s3_bucket.front-end-s3-bucket.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.s3_access_control.id
     origin_id                = local.s3_origin_id
   }
@@ -247,7 +247,7 @@ resource "aws_route53_record" "alias_example" {
 
 # //lifecycle policy to delete old data
 # resource "aws_s3_bucket_lifecycle_configuration" "delete_old" {
-#   bucket = aws_s3_bucket.nehaw-cherry-blossom-s3.id
+#   bucket = aws_s3_bucket.front-end-s3-bucket.id
 
 #   rule {
 #     id     = "delete-old-data"
