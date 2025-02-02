@@ -1,0 +1,1102 @@
+{
+  "version": 4,
+  "terraform_version": "1.10.3",
+  "serial": 104,
+  "lineage": "8ba04ad5-7dc4-0c28-8187-b27ac2ac51f6",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "zip_the_mjs_code",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": null,
+            "id": "40ba1584504e387167c1567bfc9ee001b01467b8",
+            "output_base64sha256": "P3fC2SLykJHv+8No0VAo8DrYRFDnmBZn+hOB9yFwwLA=",
+            "output_base64sha512": "IWGMDMmeqQf1MX0pW8bUuEfzn41l4AqpSuLnaO2PcvD2LHyMi+37By+VKB8Te1stzA2IbunKXR0Cjlcem9eCew==",
+            "output_file_mode": null,
+            "output_md5": "4fd49f02a33aba7865f344ab6ddd0023",
+            "output_path": "C:/AWS Resume Builder Challange/GitHub-Repo/AWS-Resume-Challange/infra/lambda/index.zip",
+            "output_sha": "40ba1584504e387167c1567bfc9ee001b01467b8",
+            "output_sha256": "3f77c2d922f29091effbc368d15028f03ad84450e7981667fa1381f72170c0b0",
+            "output_sha512": "21618c0cc99ea907f5317d295bc6d4b847f39f8d65e00aa94ae2e768ed8f72f0f62c7c8c8bedfb072f95281f137b5b2dcc0d886ee9ca5d1d028e571e9bd7827b",
+            "output_size": 745,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": null,
+            "source_file": "C:/AWS Resume Builder Challange/GitHub-Repo/AWS-Resume-Challange/infra/lambda/index.mjs",
+            "type": "zip"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_distribution",
+      "name": "s3_distribution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "aliases": [
+              "cherry-blossom1.neha-wadodkar.com"
+            ],
+            "arn": "arn:aws:cloudfront::099345257938:distribution/E1V31FRYPZ5CR2",
+            "caller_reference": "terraform-20250126150939458100000001",
+            "comment": "AWS resume challange plus terraform",
+            "continuous_deployment_policy_id": "",
+            "custom_error_response": [],
+            "default_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "DELETE",
+                  "GET",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "POST",
+                  "PUT"
+                ],
+                "cache_policy_id": "",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": false,
+                "default_ttl": 3600,
+                "field_level_encryption_id": "",
+                "forwarded_values": [
+                  {
+                    "cookies": [
+                      {
+                        "forward": "none",
+                        "whitelisted_names": []
+                      }
+                    ],
+                    "headers": [],
+                    "query_string": false,
+                    "query_string_cache_keys": []
+                  }
+                ],
+                "function_association": [],
+                "lambda_function_association": [],
+                "max_ttl": 86400,
+                "min_ttl": 0,
+                "origin_request_policy_id": "",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "",
+                "smooth_streaming": false,
+                "target_origin_id": "myS3Origin",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "allow-all"
+              }
+            ],
+            "default_root_object": "index.html",
+            "domain_name": "d2yzk87nu3s8e6.cloudfront.net",
+            "enabled": true,
+            "etag": "E2K30JJ6V6B4MD",
+            "hosted_zone_id": "Z2FDTNDATAQYW2",
+            "http_version": "http2",
+            "id": "E1V31FRYPZ5CR2",
+            "in_progress_validation_batches": 0,
+            "is_ipv6_enabled": true,
+            "last_modified_time": "2025-01-27 02:49:35.813 +0000 UTC",
+            "logging_config": [],
+            "ordered_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "GET",
+                  "HEAD",
+                  "OPTIONS"
+                ],
+                "cache_policy_id": "",
+                "cached_methods": [
+                  "GET",
+                  "HEAD",
+                  "OPTIONS"
+                ],
+                "compress": true,
+                "default_ttl": 86400,
+                "field_level_encryption_id": "",
+                "forwarded_values": [
+                  {
+                    "cookies": [
+                      {
+                        "forward": "none",
+                        "whitelisted_names": []
+                      }
+                    ],
+                    "headers": [
+                      "Origin"
+                    ],
+                    "query_string": false,
+                    "query_string_cache_keys": []
+                  }
+                ],
+                "function_association": [],
+                "lambda_function_association": [],
+                "max_ttl": 31536000,
+                "min_ttl": 0,
+                "origin_request_policy_id": "",
+                "path_pattern": "/content/immutable/*",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "",
+                "smooth_streaming": false,
+                "target_origin_id": "myS3Origin",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "redirect-to-https"
+              },
+              {
+                "allowed_methods": [
+                  "GET",
+                  "HEAD",
+                  "OPTIONS"
+                ],
+                "cache_policy_id": "",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": true,
+                "default_ttl": 3600,
+                "field_level_encryption_id": "",
+                "forwarded_values": [
+                  {
+                    "cookies": [
+                      {
+                        "forward": "none",
+                        "whitelisted_names": []
+                      }
+                    ],
+                    "headers": [],
+                    "query_string": false,
+                    "query_string_cache_keys": []
+                  }
+                ],
+                "function_association": [],
+                "lambda_function_association": [],
+                "max_ttl": 86400,
+                "min_ttl": 0,
+                "origin_request_policy_id": "",
+                "path_pattern": "/content/*",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "",
+                "smooth_streaming": false,
+                "target_origin_id": "myS3Origin",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "redirect-to-https"
+              }
+            ],
+            "origin": [
+              {
+                "connection_attempts": 3,
+                "connection_timeout": 10,
+                "custom_header": [],
+                "custom_origin_config": [],
+                "domain_name": "nehaw-cherry-blossom-s3.s3.us-east-1.amazonaws.com",
+                "origin_access_control_id": "E1BFHK6N2ETR54",
+                "origin_id": "myS3Origin",
+                "origin_path": "",
+                "origin_shield": [],
+                "s3_origin_config": [],
+                "vpc_origin_config": []
+              }
+            ],
+            "origin_group": [],
+            "price_class": "PriceClass_200",
+            "restrictions": [
+              {
+                "geo_restriction": [
+                  {
+                    "locations": [
+                      "CA",
+                      "DE",
+                      "GB",
+                      "US"
+                    ],
+                    "restriction_type": "whitelist"
+                  }
+                ]
+              }
+            ],
+            "retain_on_delete": false,
+            "staging": false,
+            "status": "Deployed",
+            "tags": {
+              "Environment": "production"
+            },
+            "tags_all": {
+              "Environment": "production"
+            },
+            "trusted_key_groups": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "trusted_signers": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "viewer_certificate": [
+              {
+                "acm_certificate_arn": "arn:aws:acm:us-east-1:099345257938:certificate/60516fe8-adee-4ad1-8b22-ee00e2808da7",
+                "cloudfront_default_certificate": false,
+                "iam_certificate_id": "",
+                "minimum_protocol_version": "TLSv1.2_2019",
+                "ssl_support_method": "sni-only"
+              }
+            ],
+            "wait_for_deployment": true,
+            "web_acl_id": ""
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_cloudfront_origin_access_control.s3_access_control",
+            "aws_s3_bucket.front-end-s3-bucket",
+            "aws_s3_bucket.nehaw-cherry-blossom-s3"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_origin_access_control",
+      "name": "s3_access_control",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "Managed by Terraform",
+            "etag": "ETVPDKIKX0DER",
+            "id": "E1BFHK6N2ETR54",
+            "name": "s3-oac-nehaw-cherry-blossom-s3",
+            "origin_access_control_origin_type": "s3",
+            "signing_behavior": "always",
+            "signing_protocol": "sigv4"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_dynamodb_table",
+      "name": "visitor_counter",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:dynamodb:us-east-1:099345257938:table/VisitorCounter1",
+            "attribute": [
+              {
+                "name": "counterID",
+                "type": "S"
+              }
+            ],
+            "billing_mode": "PAY_PER_REQUEST",
+            "deletion_protection_enabled": false,
+            "global_secondary_index": [],
+            "hash_key": "counterID",
+            "id": "VisitorCounter1",
+            "import_table": [],
+            "local_secondary_index": [],
+            "name": "VisitorCounter1",
+            "on_demand_throughput": [],
+            "point_in_time_recovery": [
+              {
+                "enabled": false
+              }
+            ],
+            "range_key": null,
+            "read_capacity": 0,
+            "replica": [],
+            "restore_date_time": null,
+            "restore_source_name": null,
+            "restore_source_table_arn": null,
+            "restore_to_latest_time": null,
+            "server_side_encryption": [],
+            "stream_arn": "",
+            "stream_enabled": false,
+            "stream_label": "",
+            "stream_view_type": "",
+            "table_class": "STANDARD",
+            "tags": {
+              "Environment": "Dev",
+              "Name": "VisitorCounter1"
+            },
+            "tags_all": {
+              "Environment": "Dev",
+              "Name": "VisitorCounter1"
+            },
+            "timeouts": null,
+            "ttl": [
+              {
+                "attribute_name": "",
+                "enabled": false
+              }
+            ],
+            "write_capacity": 0
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_dynamodb_table_item",
+      "name": "visitor_item",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "hash_key": "counterID",
+            "id": "VisitorCounter1|counterID|1",
+            "item": "{\"counterID\":{\"S\":\"1\"},\"visitCount\":{\"N\":\"11\"}}\n",
+            "range_key": null,
+            "table_name": "VisitorCounter1"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_dynamodb_table.visitor_counter"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_policy",
+      "name": "iam_policy_for_resume_project",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::099345257938:policy/aws_iam_policy_for_terraform_resume_project_policy",
+            "attachment_count": 1,
+            "description": "AWS IAM Policy for managing the resume project role",
+            "id": "arn:aws:iam::099345257938:policy/aws_iam_policy_for_terraform_resume_project_policy",
+            "name": "aws_iam_policy_for_terraform_resume_project_policy",
+            "name_prefix": "",
+            "path": "/",
+            "policy": "{\"Statement\":[{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:logs:*:*:*\"},{\"Action\":[\"dynamodb:UpdateItem\",\"dynamodb:GetItem\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:dynamodb:us-east-1:099345257938:table/VisitorCounter1\"}],\"Version\":\"2012-10-17\"}",
+            "policy_id": "ANPAROILQKXJMKBWKEDD7",
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_dynamodb_table.visitor_counter"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "iam_for_lambda",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::099345257938:role/iam_for_lambda",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"},\"Sid\":\"\"}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2025-01-06T21:12:44Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "iam_for_lambda",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::099345257938:policy/aws_iam_policy_for_terraform_resume_project_policy"
+            ],
+            "max_session_duration": 3600,
+            "name": "iam_for_lambda",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {},
+            "unique_id": "AROAROILQKXJM3D4B4ZT7"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "attach_iam_policy_to_iam_role",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "iam_for_lambda-20250106224228120500000001",
+            "policy_arn": "arn:aws:iam::099345257938:policy/aws_iam_policy_for_terraform_resume_project_policy",
+            "role": "iam_for_lambda"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_dynamodb_table.visitor_counter",
+            "aws_iam_policy.iam_policy_for_resume_project",
+            "aws_iam_role.iam_for_lambda"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "visitorCounter",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "architectures": [
+              "x86_64"
+            ],
+            "arn": "arn:aws:lambda:us-east-1:099345257938:function:visitorCounter",
+            "code_sha256": "P3fC2SLykJHv+8No0VAo8DrYRFDnmBZn+hOB9yFwwLA=",
+            "code_signing_config_arn": "",
+            "dead_letter_config": [],
+            "description": "",
+            "environment": [],
+            "ephemeral_storage": [
+              {
+                "size": 512
+              }
+            ],
+            "file_system_config": [],
+            "filename": "./lambda/index.zip",
+            "function_name": "visitorCounter",
+            "handler": "index.handler",
+            "id": "visitorCounter",
+            "image_config": [],
+            "image_uri": "",
+            "invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:099345257938:function:visitorCounter/invocations",
+            "kms_key_arn": "",
+            "last_modified": "2025-01-30T17:51:56.000+0000",
+            "layers": [],
+            "logging_config": [
+              {
+                "application_log_level": "",
+                "log_format": "Text",
+                "log_group": "/aws/lambda/visitorCounter",
+                "system_log_level": ""
+              }
+            ],
+            "memory_size": 128,
+            "package_type": "Zip",
+            "publish": false,
+            "qualified_arn": "arn:aws:lambda:us-east-1:099345257938:function:visitorCounter:$LATEST",
+            "qualified_invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:099345257938:function:visitorCounter:$LATEST/invocations",
+            "replace_security_groups_on_destroy": null,
+            "replacement_security_group_ids": null,
+            "reserved_concurrent_executions": -1,
+            "role": "arn:aws:iam::099345257938:role/iam_for_lambda",
+            "runtime": "nodejs20.x",
+            "s3_bucket": null,
+            "s3_key": null,
+            "s3_object_version": null,
+            "signing_job_arn": "",
+            "signing_profile_version_arn": "",
+            "skip_destroy": false,
+            "snap_start": [],
+            "source_code_hash": "P3fC2SLykJHv+8No0VAo8DrYRFDnmBZn+hOB9yFwwLA=",
+            "source_code_size": 745,
+            "tags": {},
+            "tags_all": {},
+            "timeout": 3,
+            "timeouts": null,
+            "tracing_config": [
+              {
+                "mode": "PassThrough"
+              }
+            ],
+            "version": "$LATEST",
+            "vpc_config": []
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_iam_role.iam_for_lambda",
+            "data.archive_file.zip_the_mjs_code"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_lambda_function_url",
+      "name": "url1",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "authorization_type": "NONE",
+            "cors": [
+              {
+                "allow_credentials": true,
+                "allow_headers": [
+                  "date",
+                  "keep-alive"
+                ],
+                "allow_methods": [
+                  "*"
+                ],
+                "allow_origins": [
+                  "*"
+                ],
+                "expose_headers": [
+                  "date",
+                  "keep-alive"
+                ],
+                "max_age": 86400
+              }
+            ],
+            "function_arn": "arn:aws:lambda:us-east-1:099345257938:function:visitorCounter",
+            "function_name": "visitorCounter",
+            "function_url": "https://w4ogzre2bx2tmu3wedcprfjd5m0mawac.lambda-url.us-east-1.on.aws/",
+            "id": "visitorCounter",
+            "invoke_mode": "BUFFERED",
+            "qualifier": "",
+            "timeouts": null,
+            "url_id": "w4ogzre2bx2tmu3wedcprfjd5m0mawac"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_iam_role.iam_for_lambda",
+            "aws_lambda_function.visitorCounter",
+            "data.archive_file.zip_the_mjs_code"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "alias_example",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": false,
+                "name": "d2yzk87nu3s8e6.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "cherry-blossom1.neha-wadodkar.com",
+            "geolocation_routing_policy": [],
+            "geoproximity_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z041837825OSUSXM9UI76_cherry-blossom1.neha-wadodkar.com_A",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "cherry-blossom1.neha-wadodkar.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "A",
+            "weighted_routing_policy": [],
+            "zone_id": "Z041837825OSUSXM9UI76"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_cloudfront_distribution.s3_distribution",
+            "aws_cloudfront_origin_access_control.s3_access_control",
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "front-end-s3-bucket",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::nehaw-cherry-blossom-s3",
+            "bucket": "nehaw-cherry-blossom-s3",
+            "bucket_domain_name": "nehaw-cherry-blossom-s3.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "nehaw-cherry-blossom-s3.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": null,
+            "grant": [
+              {
+                "id": "074745f65c7940e1a9ed036d50872253b918ef9f33d69af4c1a932da23dbd3e1",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "nehaw-cherry-blossom-s3",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Condition\":{\"StringEquals\":{\"AWS:SourceArn\":\"arn:aws:cloudfront::099345257938:distribution/E1V31FRYPZ5CR2\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudfront.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::nehaw-cherry-blossom-s3/*\"}],\"Version\":\"2012-10-17\"}",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {
+              "Name": "nehaw-cherry-blossom-s3"
+            },
+            "tags_all": {
+              "Name": "nehaw-cherry-blossom-s3"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMCJ9"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "nehaw-cherry-blossom-s3",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::nehaw-cherry-blossom-s3",
+            "bucket": "nehaw-cherry-blossom-s3",
+            "bucket_domain_name": "nehaw-cherry-blossom-s3.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "nehaw-cherry-blossom-s3.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": false,
+            "grant": [
+              {
+                "id": "074745f65c7940e1a9ed036d50872253b918ef9f33d69af4c1a932da23dbd3e1",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "nehaw-cherry-blossom-s3",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Condition\":{\"StringEquals\":{\"AWS:SourceArn\":\"arn:aws:cloudfront::099345257938:distribution/E1V31FRYPZ5CR2\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudfront.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::nehaw-cherry-blossom-s3/*\"}],\"Version\":\"2012-10-17\"}",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {
+              "Name": "nehaw-cherry-blossom-s3"
+            },
+            "tags_all": {
+              "Name": "nehaw-cherry-blossom-s3"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_policy",
+      "name": "website_bucket_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "nehaw-cherry-blossom-s3",
+            "id": "nehaw-cherry-blossom-s3",
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Condition\":{\"StringEquals\":{\"AWS:SourceArn\":\"arn:aws:cloudfront::099345257938:distribution/E1V31FRYPZ5CR2\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudfront.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::nehaw-cherry-blossom-s3/*\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_cloudfront_distribution.s3_distribution",
+            "aws_cloudfront_origin_access_control.s3_access_control",
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_object",
+      "name": "files",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": "Images/cherry1.jpg",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::nehaw-cherry-blossom-s3/Images/cherry1.jpg",
+            "bucket": "nehaw-cherry-blossom-s3",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "image/jpeg",
+            "etag": "a25f115dbfe05a68e511fd5c6a2f82f0",
+            "force_destroy": false,
+            "id": "Images/cherry1.jpg",
+            "key": "Images/cherry1.jpg",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../CherryBlossom/Images/cherry1.jpg",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {},
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        },
+        {
+          "index_key": "Images/cherry2.jpg",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::nehaw-cherry-blossom-s3/Images/cherry2.jpg",
+            "bucket": "nehaw-cherry-blossom-s3",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "image/jpeg",
+            "etag": "17a20c8982b4a39acdf5ced691ebc79c",
+            "force_destroy": false,
+            "id": "Images/cherry2.jpg",
+            "key": "Images/cherry2.jpg",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../CherryBlossom/Images/cherry2.jpg",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {},
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        },
+        {
+          "index_key": "Images/cherry3.jpg",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::nehaw-cherry-blossom-s3/Images/cherry3.jpg",
+            "bucket": "nehaw-cherry-blossom-s3",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "image/jpeg",
+            "etag": "320ab721aab3b03694a2e5c969751186",
+            "force_destroy": false,
+            "id": "Images/cherry3.jpg",
+            "key": "Images/cherry3.jpg",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../CherryBlossom/Images/cherry3.jpg",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {},
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        },
+        {
+          "index_key": "Scripts/index.js",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::nehaw-cherry-blossom-s3/Scripts/index.js",
+            "bucket": "nehaw-cherry-blossom-s3",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "application/javascript",
+            "etag": "47d1b1accbdf1a87bf51f2ae0186c597",
+            "force_destroy": false,
+            "id": "Scripts/index.js",
+            "key": "Scripts/index.js",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../CherryBlossom/Scripts/index.js",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {},
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        },
+        {
+          "index_key": "index.html",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::nehaw-cherry-blossom-s3/index.html",
+            "bucket": "nehaw-cherry-blossom-s3",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "text/html",
+            "etag": "c14a48dd4965c2b1cc20ea6a70f004d0",
+            "force_destroy": false,
+            "id": "index.html",
+            "key": "index.html",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../CherryBlossom/index.html",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {},
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        },
+        {
+          "index_key": "style.css",
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::nehaw-cherry-blossom-s3/style.css",
+            "bucket": "nehaw-cherry-blossom-s3",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "text/css",
+            "etag": "32d2d753bcdb292ce830876e7f703a9e",
+            "force_destroy": false,
+            "id": "style.css",
+            "key": "style.css",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../CherryBlossom/style.css",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {},
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.front-end-s3-bucket"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
