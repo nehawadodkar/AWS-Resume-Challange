@@ -102,7 +102,7 @@ resource "aws_s3_object" "config" {
   #acl    = "public-read"
   content_type = "application/javascript"
   etag = "${local_file.config_js.filename}" 
-  #depends_on = [aws_s3_object.files,local_file.config_js]
+  ##depends_on = [aws_s3_object.files,local_file.config_js]
 }
 
 
