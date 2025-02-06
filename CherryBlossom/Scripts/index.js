@@ -2,8 +2,10 @@ const counter = document.querySelector(".counter-number");
 
 async function updateCounter() {
   try {
+    const config = await import('./config.js')
+    console.log("Lambda Function URL:", config.FUNCTION_URL);
     // Fetch the response from the API
-    let response = await fetch("https://w4ogzre2bx2tmu3wedcprfjd5m0mawac.lambda-url.us-east-1.on.aws/");
+    let response = await fetch(config.FUNCTION_URL);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     // Parse the JSON data
