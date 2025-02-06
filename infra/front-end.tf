@@ -1,13 +1,13 @@
+# Creating a bucket to house the front end components
 resource "aws_s3_bucket" "front-end-s3-bucket" {
   bucket = "${var.s3_bucket_name}"
 
   tags = {
     Name = "${var.s3_bucket_name}"
   }
-
-
 }
 
+# block all public access to the bucket
 resource "aws_s3_bucket_public_access_block" "front-end-s3-bucket-public-access" {
   bucket = aws_s3_bucket.front-end-s3-bucket.id
 
@@ -24,14 +24,11 @@ resource "aws_s3_bucket_public_access_block" "front-end-s3-bucket-public-access"
 
 
 
-########################################################################################################
-#Removing this part of the code from here, since we intend to use terrafrom just to manage infrastructure
-#Uploading content will be taken care by Github actions 
-#########################################################################################################
+
 # Fetch all files from the `files` directory
 locals {
   source_directory = "${path.module}/../CherryBlossom" # Adjust the path as needed
-  alternate_domain = "cherry-blossom1.neha-wadodkar.com"
+  #alternate_domain = "${var.alternate_domain_name}"
   files            = fileset(local.source_directory, "**")
   mime_types = {
     "html" = "text/html"
@@ -44,11 +41,10 @@ locals {
 }
 
 
-########################################################################################################
-#Removing this part of the code from here, since we intend to use terrafrom just to manage infrastructure
-#Uploading content will be taken care by Github actions 
-#########################################################################################################
+
 # Upload each file to the S3 bucket
+# Making sure that the items get added to the bucket only first time while the bucket is created. 
+  # After that, this is handled by github actions.
 resource "aws_s3_object" "files" {
   for_each = tomap({ for file in local.files : file => file })
 
@@ -59,15 +55,18 @@ resource "aws_s3_object" "files" {
   # Determine content_type based on file extension
   content_type = local.mime_types[tolist(split(".", each.value))[length(tolist(split(".", each.value))) - 1]]
 
-  lifecycle {
-    ignore_changes = [etag, source]
-  }
+  
+  #lifecycle {
+  #  ignore_changes = [etag, source]
+  #}
+
+  
 
 }
 
 
 
-# resource "aws_s3_bucket_policy" "public_read" {
+#  resource "aws_s3_bucket_policy" "public_read" {
 #   bucket = aws_s3_bucket.front-end-s3-bucket.id
 
 #   policy = jsonencode({
@@ -138,7 +137,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   #   prefix          = "myprefix"
   # }
 
-  aliases = ["${local.alternate_domain}"]
+  aliases = ["${var.alternate_domain_name}"]
 
 
 
@@ -229,7 +228,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 resource "aws_route53_record" "alias_example" {
   zone_id = "Z041837825OSUSXM9UI76" # Hosted zone ID
-  name    = local.alternate_domain
+  name    = "${var.alternate_domain_name}"
   type    = "A"
 
   alias {

@@ -1,10 +1,16 @@
 resource "aws_lambda_function" "visitorCounter" {
   filename         = data.archive_file.zip_the_mjs_code.output_path
   source_code_hash = data.archive_file.zip_the_mjs_code.output_base64sha256
-  function_name    = "visitorCounter"
+  function_name    = "${var.lambda_function_name}"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "index.handler"
   runtime          = "nodejs20.x"
+
+  environment {
+    variables = {
+      dynamodb_table = var.dynamodb_table_name  # Passing the variable from tfvars
+    }
+  }
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
@@ -83,9 +89,25 @@ resource "aws_lambda_function_url" "url1" {
   }
 }
 
+resource "local_file" "config_js" {
+  content  = "export const FUNCTION_URL = \"${aws_lambda_function_url.url1.function_url}\";"
+  filename = "${path.module}/../CherryBlossom/Scripts/config.js"
+}
+
+#Upload the config.js file to the S3 bucket
+resource "aws_s3_object" "config" {
+  bucket = aws_s3_bucket.front-end-s3-bucket.bucket
+  key    = "Scripts/config.js"
+  source = "${local.source_directory}/${local_file.config_js.filename}"  # Local path to config.js
+  #acl    = "public-read"
+  content_type = "application/javascript"
+  etag = "${local_file.config_js.filename}" 
+  #depends_on = [aws_s3_object.files,local_file.config_js]
+}
+
 
 resource "aws_dynamodb_table" "visitor_counter" {
-  name         = "VisitorCounter1"
+  name         = "${var.dynamodb_table_name}"
   billing_mode = "PAY_PER_REQUEST"  # On-demand pricing
 
   attribute {
@@ -96,7 +118,7 @@ resource "aws_dynamodb_table" "visitor_counter" {
   hash_key = "counterID"
 
   tags = {
-    Name        = "VisitorCounter1"
+    Name        = "${var.dynamodb_table_name}"
     Environment = "Dev"
   }
 }
