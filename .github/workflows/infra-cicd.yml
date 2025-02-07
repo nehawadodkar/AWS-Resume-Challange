@@ -16,13 +16,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Change to infra directory
+        run: cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
+
+      
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: '1.4.0'
-
-      - name: Change to infra directory
-        run: cd infra
 
       - name: Terraform Init
         run: terraform init
