@@ -101,7 +101,7 @@ resource "aws_s3_object" "config" {
   source = "${local.source_directory}/${local_file.config_js.filename}"  # Local path to config.js
   #acl    = "public-read"
   content_type = "application/javascript"
-  etag = "${local_file.config_js.filename}" 
+  #etag = "${local_file.config_js.filename}" 
   ##depends_on = [aws_s3_object.files,local_file.config_js]
 }
 
