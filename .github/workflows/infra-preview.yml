@@ -12,7 +12,7 @@ on:
 
 
 jobs:
-  deploy:
+  terraform-plan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
