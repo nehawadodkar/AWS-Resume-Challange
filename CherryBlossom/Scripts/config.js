@@ -1,1 +1,0 @@
-export const FUNCTION_URL = "https://d3s35h4u7dlkvzlwc4opnfhkny0qfvit.lambda-url.us-east-1.on.aws/";
