@@ -1,4 +1,4 @@
-name: upload website to S3
+name: Upload Website to S3
 
 on:
   push:
@@ -25,18 +25,28 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1  
           
-      
       # Step 3: Upload folder to S3
       - name: Upload folder to S3
         run: |
-          aws s3 sync ./CherryBlossom s3://${{ secrets.AWS_BUCKET_NAME }}
-        env:
-          AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+          aws s3 sync ./CherryBlossom s3://${{ vars.S3_BUCKET_NAME }}
 
       # Step 4: Invalidate CloudFront Cache for changed HTML files
       - name: Invalidate CloudFront Cache for index.html
+        env:
+          BUCKET_NAME: ${{ vars.S3_BUCKET_NAME }}
         run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
-  
+          DISTRIBUTION_IDS=$(aws cloudfront list-distributions \
+            --query "DistributionList.Items[?Origins.Items[?contains(DomainName, '${BUCKET_NAME}.s3.amazonaws.com')]].Id" \
+            --output text)
+
+          if [ -z "$DISTRIBUTION_IDS" ]; then
+            echo "No CloudFront distribution found for bucket: $BUCKET_NAME"
+            exit 0  # Exit gracefully without failing the workflow
+          fi
+
+          for DISTRIBUTION_ID in $DISTRIBUTION_IDS; do
+            echo "Invalidating CloudFront distribution: $DISTRIBUTION_ID"
+            aws cloudfront create-invalidation \
+              --distribution-id "$DISTRIBUTION_ID" \
+              --paths "/*"
+          done
