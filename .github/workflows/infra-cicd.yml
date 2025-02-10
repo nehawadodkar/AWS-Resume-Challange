@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-  deploy:
+  terraform-apply:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
