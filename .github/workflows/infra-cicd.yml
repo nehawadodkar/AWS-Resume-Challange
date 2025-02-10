@@ -1,12 +1,14 @@
 name: Terraform Deployment
 
 on:
-  push:
-    branches:
-      - main
+  #push:
+    #branches:
+    #  - main
+  pull_request:
+    types: [opened, synchronize, reopened]
     paths:
       - 'infra/**'  # Run only if files in this folder change
-      - '.github/workflows/infra**'
+      - '.github/workflows/infra/**'
 
 
 jobs:
