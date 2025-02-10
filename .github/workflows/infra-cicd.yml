@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'infra/**'  # Run only if files in this folder change
-      - '.github/workflows/infra/**'
+      - '.github/workflows/infra-cicd.yml'
 
 
 jobs:
