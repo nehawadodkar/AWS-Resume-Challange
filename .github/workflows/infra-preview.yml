@@ -1,4 +1,4 @@
-name: Terraform Deployment
+name: Terraform plan
 
 on:
   #push:
@@ -8,11 +8,11 @@ on:
     types: [opened, synchronize, reopened]
     paths:
       - 'infra/**'  # Run only if files in this folder change
-      - '.github/workflows/infra/**'
+      - '.github/workflows/infra-preview.yml'
 
 
 jobs:
-  deploy:
+  terraform-plan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
