@@ -1,0 +1,44 @@
+name: Terraform Deployment
+
+on:
+  workflow_dispatch:
+  
+
+jobs:
+  terraform-apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Change to infra directory
+        run: cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
+
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.4.0'
+
+      - name: Terraform Init
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: | 
+          cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
+          terraform init
+
+      
+      - name: Terraform destroy
+        run: | 
+          cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
+          terraform destroy -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
+          TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
+          TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
+          TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
