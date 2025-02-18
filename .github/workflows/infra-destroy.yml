@@ -1,13 +1,8 @@
 name: Terraform Deployment
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'infra/**'  # Run only if files in this folder change
-      - '.github/workflows/infra-cicd.yml'
-
+  workflow_dispatch:
+  
 
 jobs:
   terraform-apply:
@@ -33,25 +28,11 @@ jobs:
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
           terraform init
 
-      - name: Terraform Plan
+      
+      - name: Terraform destroy
         run: | 
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
-          terraform plan
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
-          TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
-          TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
-          TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
-        
-
-      - name: Terraform Apply
-        run: | 
-          cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
-          terraform apply -auto-approve
+          terraform destroy -auto-approve
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
