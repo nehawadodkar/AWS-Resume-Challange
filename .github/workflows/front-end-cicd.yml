@@ -1,15 +1,7 @@
-name: Upload Website to S3
+name: Upload/Update Website Front to S3
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: "Select branch to trigger workflow"
-        required: true
-        default: "main"
-        type: choice
-        options:
-          - "main"
   push:
     branches:
       - main  
