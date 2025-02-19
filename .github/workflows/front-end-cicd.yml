@@ -2,6 +2,14 @@ name: Upload Website to S3
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: "Select branch to trigger workflow"
+        required: true
+        default: "main"
+        type: choice
+        options:
+          - "main"
   push:
     branches:
       - main  
@@ -9,6 +17,16 @@ on:
       - 'CherryBlossom/**'  # Run only if files in this folder change
 
 jobs:
+
+  restricted_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if not on main branch
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "This workflow can only be triggered from the main branch."
+          exit 1
+
   upload-to-s3:
     name: Upload to S3
     runs-on: ubuntu-latest
