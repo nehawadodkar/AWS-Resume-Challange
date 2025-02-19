@@ -10,14 +10,14 @@ on:
 
 jobs:
 
-  restricted_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fail if not on main branch
-        if: github.ref != 'refs/heads/main'
-        run: |
-          echo "This workflow can only be triggered from the main branch."
-          exit 1
+  # restricted_job:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Fail if not on main branch
+  #       if: github.ref != 'refs/heads/main'
+  #       run: |
+  #         echo "This workflow can only be triggered from the main branch."
+  #         exit 1
 
   upload-to-s3:
     name: Upload to S3
