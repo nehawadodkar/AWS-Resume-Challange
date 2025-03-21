@@ -47,15 +47,6 @@ jobs:
           TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
           TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
 
-      - name: Check if tfplan exists
-        run: | 
-          ls -lah /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/
-          cat /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
-          pwd
-          file /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
-          tar -czf /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan.tar.gz -C /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra tfplan
-          ls -lah /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/
-        
       - name: Upload Terraform Plan
         uses: actions/upload-artifact@v4
         with:
