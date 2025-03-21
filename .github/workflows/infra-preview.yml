@@ -53,9 +53,17 @@ jobs:
       - name: Terraform Plan
         run: | 
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
-          terraform plan
+          terraform plan -out=tfplan
         env:
           TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
           TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
           TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
           TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform-plan
+          path: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
+
+    
