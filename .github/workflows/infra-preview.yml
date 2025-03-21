@@ -56,12 +56,12 @@ jobs:
           tar -czf /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan.tar.gz -C /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra tfplan
           ls -lah /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/
         
-      - name: Upload Terraform Plan
-        uses: actions/upload-artifact@v3
-        with:
-          name: terraform-plan
-          path: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan.tar.gz
-          retention-days: 30
+      # - name: Upload Terraform Plan
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: terraform-plan
+      #     path: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan.tar.gz
+      #     retention-days: 30
 
 
       
