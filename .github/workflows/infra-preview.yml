@@ -53,12 +53,12 @@ jobs:
           cat /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
           pwd
         
-      # - name: Upload Terraform Plan
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: terraform-plan
-      #     path: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
-      #     retention-days: 30
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform-plan
+          path: /infra/tfplan
+          retention-days: 30
 
 
       
