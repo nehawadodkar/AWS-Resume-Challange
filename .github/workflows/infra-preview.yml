@@ -48,7 +48,9 @@ jobs:
           TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
 
       - name: Check if tfplan exists
-        run: ls -lah /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/
+        run: | 
+          ls -lah /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/
+          cat /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
         
       # - name: Upload Terraform Plan
       #   uses: actions/upload-artifact@v3
