@@ -5,8 +5,10 @@ terraform.tfvars
 *.tfstate
 *.tfstate.backup
 *.tfstate.*.backup
+*.tfstate.*.backup.*
+*.tfstate.*.*
 
 # Ignore local Terraform directories
 .terraform/
 
-#ignore the zip file as well #todo
+# Ignore the zip file as well #todo
