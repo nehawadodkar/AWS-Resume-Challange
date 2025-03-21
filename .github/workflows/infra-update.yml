@@ -9,7 +9,6 @@ on:
       - 'infra/**'  # Run only if files in this folder change
       - '.github/workflows/infra-update.yml'
 
-
 jobs:
   
   # restricted_job:
@@ -23,23 +22,28 @@ jobs:
   
   terraform-apply:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
       - name: Change to infra directory
         run: cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
 
-      
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: '1.4.0'
 
       - name: Terraform Init
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: | 
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
           terraform init
@@ -49,25 +53,16 @@ jobs:
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
           terraform plan
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
           TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
           TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
           TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
-        
 
       - name: Terraform Apply
         run: | 
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
           terraform apply -auto-approve
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          TF_VAR_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          TF_VAR_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
           TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
           TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
