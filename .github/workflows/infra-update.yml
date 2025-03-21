@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - 'infra/**'  # Run only if files in this folder change
-      - '.github/workflows/infra-update.yml'
+      - '.github/workflows/**'
 
 jobs:
   
