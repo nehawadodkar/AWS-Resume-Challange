@@ -1,9 +1,6 @@
 name: Terraform plan
 
 on:
-  #push:
-    #branches:
-    #  - main
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -12,16 +9,6 @@ on:
       - '.github/workflows/infra-preview.yml'
 
 jobs:
-  
-  # restricted_job:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Fail if not on main branch
-  #       if: github.ref != 'refs/heads/main'
-  #       run: |
-  #         echo "This workflow can only be triggered from the main branch."
-  #         exit 1
-  
   terraform-plan:
     runs-on: ubuntu-latest
     permissions:
@@ -49,7 +36,6 @@ jobs:
         run: | 
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
           terraform init
-        working-directory: ./infra
 
       - name: Terraform Plan
         run: | 
@@ -60,12 +46,12 @@ jobs:
           TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
           TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
           TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
-        working-directory: ./infra
 
       - name: Upload Terraform Plan
         uses: actions/upload-artifact@v3
         with:
           name: terraform-plan
-          path: ./infra
+          path: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
+          retention-days: 30
 
-    
+
