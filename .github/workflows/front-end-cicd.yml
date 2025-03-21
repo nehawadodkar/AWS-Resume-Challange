@@ -7,6 +7,7 @@ on:
       - main  
     paths:
       - 'CherryBlossom/**'  # Run only if files in this folder change
+      - '.github/workflows/fonrt-end-cicd.yml'
 
 jobs:
 
