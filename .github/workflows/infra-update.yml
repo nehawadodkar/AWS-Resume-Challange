@@ -35,6 +35,12 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: us-east-1
 
+      - name: Download Terraform Plan
+        uses: actions/download-artifact@v3
+        with:
+            name: terraform-plan
+            path: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
+      
       - name: Change to infra directory
         run: cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
 
@@ -48,20 +54,20 @@ jobs:
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
           terraform init
 
-      - name: Terraform Plan
-        run: | 
-          cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
-          terraform plan
-        env:
-          TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
-          TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
-          TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
-          TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
+      # - name: Terraform Plan
+      #   run: | 
+      #     cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
+      #     terraform plan
+      #   env:
+      #     TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
+      #     TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
+      #     TF_VAR_lambda_function_name: ${{ vars.LAMBDA_FUNCTION_NAME }}
+      #     TF_VAR_dynamodb_table_name: ${{ vars.DYNAMO_DB_TABLE_NAME }}
 
       - name: Terraform Apply
         run: | 
           cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
-          terraform apply -auto-approve
+          terraform apply -auto-approve tfplan
         env:
           TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
           TF_VAR_alternate_domain_name: ${{ vars.ALTERNATE_DOMAIN_NAME }}
