@@ -50,7 +50,7 @@ jobs:
       - name: Upload Terraform Plan
         uses: actions/upload-artifact@v4
         with:
-          name: tfplan
+          name: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
           path: tfplan
           retention-days: 30
 
