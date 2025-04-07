@@ -35,11 +35,14 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: us-east-1
 
-      - name: Download Terraform Plan
+      - name: Download plan file
         uses: actions/download-artifact@v4
         with:
-            name: terraform-plan
-            path: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
+          name: tfplan
+          path: .
+      
+      - name: Move plan file to infra directory
+        run: mv tfplan /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/
       
       - name: Change to infra directory
         run: cd /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
