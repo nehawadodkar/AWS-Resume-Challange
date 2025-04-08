@@ -42,8 +42,15 @@ jobs:
       #     path: .
 
       # Download the plan file from S3
-      - name: Download Plan File from S3
-        run: aws s3 cp s3://nehaw-terraform-plan-storage/tfplans/latest.tfplan /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
+      # - name: Download Plan File from S3
+      #   run: aws s3 cp s3://nehaw-terraform-plan-storage/tfplans/latest.tfplan /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
+
+      # Download the plan file from S3
+      - name: Download matching plan file from S3
+        run: |
+          sha=$(git --git-dir=.git --work-tree=. log --no-merges -n 1 --pretty=format:"%H")
+          echo "Using SHA: $sha"
+          aws s3 cp s3://nehaw-terraform-plan-storage/tfplans/plan-${sha}.tfplan /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
       
       # - name: Move plan file to infra directory
       #   run: mv tfplan /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/
