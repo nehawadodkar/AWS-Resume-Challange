@@ -28,6 +28,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Important! Gets full commit history
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -48,7 +50,9 @@ jobs:
       # Download the plan file from S3
       - name: Download matching plan file from S3
         run: |
-          sha=$(git --git-dir=.git --work-tree=. log --no-merges -n 1 --pretty=format:"%H")
+          #sha=$(git --git-dir=.git --work-tree=. log --no-merges -n 1 --pretty=format:"%H")
+          #echo "Using SHA: $sha"
+          sha=$(git rev-list --no-merges -n 1 HEAD)
           echo "Using SHA: $sha"
           aws s3 cp s3://nehaw-terraform-plan-storage/tfplans/plan-${sha}.tfplan /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra/tfplan
       
