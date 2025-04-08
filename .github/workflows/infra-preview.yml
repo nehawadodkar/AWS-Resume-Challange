@@ -56,7 +56,10 @@ jobs:
 
       - name: Upload tfplan to S3
         working-directory: /home/runner/work/AWS-Resume-Challange/AWS-Resume-Challange/infra
-        run: aws s3 cp tfplan s3://nehaw-terraform-plan-storage/tfplans/latest.tfplan
+        run: |
+          actual_sha=$(git log --no-merges -n 1 --pretty=format:"%H")
+          echo "Using commit SHA: $actual_sha"
+          aws s3 cp tfplan s3://nehaw-terraform-plan-storage/tfplans/plan-${actual_sha}.tfplan
 
 
       
