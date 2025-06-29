@@ -152,6 +152,5 @@ The repository is organized into the following main folders:
 
 - Inspired by the Cloud Resume Challenge.
 - Built using AWS, Terraform, and GitHub Actions.
-- Cherry Blossom image by [Photographer's Name](https://link-to-photographer-website) on Unsplash.
 
 ---
