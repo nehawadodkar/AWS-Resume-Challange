@@ -16,6 +16,7 @@
 - [Security & Best Practices](#security--best-practices)
 - [Troubleshooting](#troubleshooting)
 - [Credits](#credits)
+- [Future Plans](#future-plans)
 
 ---
 
@@ -154,3 +155,18 @@ The repository is organized into the following main folders:
 - Built using AWS, Terraform, and GitHub Actions.
 
 ---
+
+## Future Plans
+
+- **ECS/Fargate Analytics Microservice:**  
+  Implement a containerized analytics service (Flask/Express) on ECS Fargate.
+  - Receives visit data from Lambda or frontend
+  - Stores analytics in DynamoDB or S3
+  - Exposes REST API for future dashboards
+
+- [ ] Write and dockerize a simple analytics API
+- [ ] Add Terraform code for ECS, Fargate, and ALB
+- [ ] Integrate Lambda to POST visit data to the new service
+- [ ] Document the new architecture and update diagrams
+
+*See [FUTURE.md](FUTURE.md) for detailed plans and requirements.*
