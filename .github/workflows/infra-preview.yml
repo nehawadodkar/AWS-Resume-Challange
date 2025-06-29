@@ -62,9 +62,7 @@ jobs:
         run: |
           actual_sha=$(git log --no-merges -n 1 --pretty=format:"%H")
           echo "Using commit SHA: $actual_sha"
-          echo "The commit SHA is ${{ github.sha }}"
-          aws s3 cp tfplan s3://nehaw-terraform-plan-storage/tfplans/plan-${{ github.sha }}.tfplan
+          aws s3 cp tfplan s3://nehaw-terraform-plan-storage/tfplans/plan-${actual_sha}.tfplan
 
 
-
-
+        
