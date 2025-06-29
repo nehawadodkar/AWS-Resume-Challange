@@ -1,4 +1,4 @@
-# Cherry Blossom Webpage
+# Cherry Blossom Webpage.
 
 This project is inspired by the Cloud Resume Challenge, but instead of creating an online resume, I've developed a webpage that showcases information about the Cherry Blossom Festival in Washington, DC.
 
