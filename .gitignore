@@ -12,3 +12,4 @@ terraform.tfvars
 .terraform/
 
 # Ignore the zip file as well #todonode_modules/
+node_modules/
