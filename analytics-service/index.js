@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Configure AWS SDK (will use IAM role in ECS, but you can test locally with credentials)
+// Configure AWS SDK (will use IAM role in ECS, but you can test locally with credentials).
 AWS.config.update({ region: 'us-east-1' });
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
