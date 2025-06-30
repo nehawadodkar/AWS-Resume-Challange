@@ -11,4 +11,4 @@ terraform.tfvars
 # Ignore local Terraform directories
 .terraform/
 
-# Ignore the zip file as well #todo
+# Ignore the zip file as well #todonode_modules/
