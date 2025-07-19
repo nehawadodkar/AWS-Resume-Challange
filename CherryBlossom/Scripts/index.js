@@ -2,35 +2,36 @@ const counter = document.querySelector(".counter-number");
 
 async function updateCounter() {
   try {
-    // 1. Call Lambda for visitor count (no change)
-    let counterResponse = await fetch("https://your-lambda-function-url.amazonaws.com");
-    if (!counterResponse.ok) throw new Error(`Lambda error! status: ${counterResponse.status}`);
-    let counterData = await counterResponse.json();
+    const config = await import('./config.js');
+    console.log("Lambda Function URL:", config.FUNCTION_URL);
 
-    if (counterData.updatedVisitCount) {
-      counter.innerHTML = `Views: ${counterData.updatedVisitCount}`;
+    // 1. Call Lambda for visitor counter
+    let response = await fetch(config.FUNCTION_URL);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    let data = await response.json();
+
+    if (data.updatedVisitCount) {
+      counter.innerHTML = `Views: ${data.updatedVisitCount}`;
     } else {
       throw new Error("Unexpected response format from Lambda");
     }
 
-    // 2. Call ECS Analytics Service directly via Load Balancer DNS
+    // 2. Send analytics data to ECS (hardcoded URL)
     const analyticsPayload = {
       timestamp: new Date().toISOString(),
       user_agent: navigator.userAgent,
       referrer: document.referrer,
+      // Leave out IP – backend will derive it if needed
     };
 
-    console.log("Sending analytics data:", analyticsPayload);  // Add this for debugging
+    console.log("Sending analytics data:", analyticsPayload);
 
-    let analyticsResponse = await fetch("https://analytics.neha-wadodkar.com/log-visit", {
+    await fetch("https://analytics.neha-wadodkar.com/log-visit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(analyticsPayload)
     });
-
-    if (!analyticsResponse.ok) {
-      throw new Error(`Analytics service error! status: ${analyticsResponse.status}`);
-    }
 
   } catch (error) {
     counter.innerHTML = "Couldn't read views";
