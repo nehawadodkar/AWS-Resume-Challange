@@ -20,7 +20,7 @@ async function updateCounter() {
       referrer: document.referrer,
     };
 
-    await fetch("http://analytics-alb-505390548.us-east-1.elb.amazonaws.com/log-visit", {
+    await fetch("https://analytics.neha-wadodkar.com/log-visit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(analyticsPayload)
