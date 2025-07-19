@@ -4,6 +4,15 @@ const AWS = require('aws-sdk');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// ✅ Add this CORS middleware before any routes
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // Replace * with your domain to restrict access
+  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === 'OPTIONS') return res.sendStatus(200); // CORS preflight response
+  next();
+});
+
 // Configure AWS SDK (will use IAM role in ECS, but you can test locally with credentials)..
 AWS.config.update({ region: 'us-east-1' });
 const dynamodb = new AWS.DynamoDB.DocumentClient();
