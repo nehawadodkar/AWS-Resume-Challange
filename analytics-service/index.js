@@ -19,7 +19,8 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 app.use(express.json());
 
 app.post('/log-visit', async (req, res) => {
-  const { timestamp, ip, user_agent, referrer } = req.body;
+  const { timestamp, user_agent, referrer } = req.body;
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
   if (!timestamp || !ip || !user_agent) {
     return res.status(400).json({ error: 'Missing required fields' });
